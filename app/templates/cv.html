@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CV - {{ cv.nom }} {{ cv.prenom }}</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="page cv-page">
+        <header>
+            <h1>{{ cv.nom }} {{ cv.prenom }}</h1>
+            <p>{{ cv.titre }}</p>
+            <p>{{ cv.email }} | {{ cv.telephone }} | {{ cv.linkedin }}</p>
+        </header>
+
+        <main>
+            <section class="cv-section" id="profil-section">
+                <h2>Profil</h2>
+                <p>{{ cv.profil }}</p>
+            </section>
+
+            <section class="cv-section" id="competences-section">
+                <h2>Compétences</h2>
+                <ul>
+                    {% for skill in cv.competences %}
+                    <li>{{ skill }}</li>
+                    {% endfor %}
+                </ul>
+            </section>
+
+            <section class="cv-section" id="experience-section">
+                <h2>Expérience professionnelle</h2>
+                {% for exp in cv.experiences %}
+                <div class="experience">
+                    <h3>{{ exp.poste }} - {{ exp.entreprise }}</h3>
+                    <p>{{ exp.date_debut }} - {{ exp.date_fin }}</p>
+                    <p>{{ exp.description }}</p>
+                </div>
+                {% endfor %}
+            </section>
+
+            <section class="cv-section" id="formation-section">
+                <h2>Formation</h2>
+                {% for edu in cv.formations %}
+                <div class="formation">
+                    <h3>{{ edu.diplome }}</h3>
+                    <p>{{ edu.ecole }} - {{ edu.annee }}</p>
+                </div>
+                {% endfor %}
+            </section>
+
+            <section class="cv-section" id="langues-section">
+                <h2>Langues</h2>
+                <ul>
+                    {% for langue in cv.langues %}
+                    <li>{{ langue.nom }} - {{ langue.niveau }}</li>
+                    {% endfor %}
+                </ul>
+            </section>
+        </main>
+
+        <footer>
+            <p>Document généré automatiquement. © {{ cv.nom }}</p>
+        </footer>
+    </div>
+</body>
+</html>
